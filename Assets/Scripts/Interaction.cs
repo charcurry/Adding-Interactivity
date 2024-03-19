@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    public GameObject currentInteractable;
+    public InteractableObject currentInteractable;
     public string objectTag = "Interactable";
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class Interaction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("Near Object");
+                currentInteractable.Activate();
             }
         }
     }
@@ -28,7 +28,7 @@ public class Interaction : MonoBehaviour
     {
        if (collision.CompareTag(objectTag) == true)
         {
-            currentInteractable = collision.gameObject;
+            currentInteractable = collision.GetComponent<InteractableObject>();
         }     
     }
 

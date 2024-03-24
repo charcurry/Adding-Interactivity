@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
         Settings,
         Pause,
         GameOver,
-        GameWin
+        GameWin,
+        Dialogue
     }
 
     public GameState gameState;
@@ -61,6 +62,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GameWin:
                 GameWin();
+                break;
+            case GameState.Dialogue:
+                Dialogue();
                 break;
         }
     }
@@ -106,6 +110,11 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         playerSprite.SetActive(false);
         uiManager.UIGameWin();
+    }
+
+    private void Dialogue()
+    {
+        Cursor.visible = true;
     }
 
     public void PauseGame()

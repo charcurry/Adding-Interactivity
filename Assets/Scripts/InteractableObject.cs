@@ -13,10 +13,13 @@ public class InteractableObject : MonoBehaviour
     private GameObject characterText;
     public string text;
 
+    public string[] sentences;
+
     public enum ObjectType
     {
         Pickup,
-        Info
+        Info,
+        Dialogue
     }
 
     public void Start()
@@ -37,6 +40,10 @@ public class InteractableObject : MonoBehaviour
         {
             Pickup();
         }
+        if (type == ObjectType.Dialogue)
+        {
+            Dialogue();
+        }
     }
 
     private void Info()
@@ -54,9 +61,15 @@ public class InteractableObject : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void Dialogue()
+    {
+        FindObjectOfType<GameManager>().gameState = GameManager.GameState.Dialogue;
+        FindObjectOfType<DialogueManager>().StartDialogue(sentences);
+    }
+
     IEnumerator DeleteText()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2.5f);
         characterText.GetComponent<TextMeshProUGUI>().text = null;
         characterText.SetActive(false);
     }

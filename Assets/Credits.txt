@@ -1,2 +1,3 @@
 IMAGE La Red Games - Gems / Coins Free - Liscense (not found) - src: https://laredgames.itch.io/gems-coins-free
 IMAGE pixeleart - wood post sign in pixel art style Pro Vector - Liscense (not found) - src: https://www.vecteezy.com/vector-art/21867031-wood-post-sign-in-pixel-art-style
+IMAGE Sam Robichaud - character - Liscense (educational use) (this was in the project by default)

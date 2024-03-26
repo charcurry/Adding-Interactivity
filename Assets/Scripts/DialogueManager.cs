@@ -14,6 +14,8 @@ public class DialogueManager : MonoBehaviour
     private bool isTyping = false;
     private bool cancelTyping = false;
 
+    public bool isActive;
+
     public float typeSpeed;
 
     private Queue<string> dialogue;
@@ -28,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogue.Clear();
         dialogueUI.SetActive(true);
-
+        isActive = true;
         SuspendPlayerControl();
 
         foreach (string sentence in sentences) 
@@ -78,9 +80,7 @@ public class DialogueManager : MonoBehaviour
     {
         player.GetComponent<CharacterController2D>().enabled = false;
         player.GetComponent<Interaction>().enabled = false;
-        //Cursor.visible = true;
         animator.enabled = false;
-        //animator.SetFloat("Speed", 0);
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
@@ -88,14 +88,13 @@ public class DialogueManager : MonoBehaviour
     {
         player.GetComponent<CharacterController2D>().enabled = true;
         player.GetComponent<Interaction>().enabled = true;
-        //Cursor.visible = false;
         animator.enabled = true;
-        //animator.SetFloat("Speed", 1);
     }
 
     public void EndDialogue()
     {
         ResumePlayerControl();
+        isActive = false;
         dialogueUI.SetActive(false);
         FindObjectOfType<GameManager>().gameState = GameManager.GameState.Gameplay;
     }

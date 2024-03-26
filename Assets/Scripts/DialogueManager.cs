@@ -11,6 +11,11 @@ public class DialogueManager : MonoBehaviour
     public GameObject player;
     public Animator animator;
 
+    private bool isTyping = false;
+    private bool cancelTyping = false;
+
+    public float typeSpeed;
+
     private Queue<string> dialogue;
 
     // Start is called before the first frame update
@@ -35,14 +40,38 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence() 
     {
-        if (dialogue.Count == 0)
+        if (!isTyping)
         {
-            EndDialogue();
-            return;
-        }
-        string currentLine = dialogue.Dequeue();
+            if (dialogue.Count == 0)
+            {
+                EndDialogue();
+                return;
+            }
+            string currentLine = dialogue.Dequeue();
 
-        dialogueText.text = currentLine;
+            StartCoroutine(TextScroll(currentLine));
+        }
+        else if (isTyping && !cancelTyping)
+        {
+            cancelTyping = true;
+        }
+    }
+
+    private IEnumerator TextScroll(string lineOfText)
+    {
+        int letter = 0;
+        dialogueText.text = "";
+        isTyping = true;
+        cancelTyping = false;
+        while (isTyping && !cancelTyping && (letter < lineOfText.Length - 1))
+        {
+            dialogueText.text += lineOfText[letter];
+            letter++;
+            yield return new WaitForSeconds(typeSpeed);
+        }
+        dialogueText.text = lineOfText;
+        isTyping = false;
+        cancelTyping = false;
     }
 
     void SuspendPlayerControl()

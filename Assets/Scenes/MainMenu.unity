@@ -4462,6 +4462,7 @@ MonoBehaviour:
   dialogueText: {fileID: 874613282}
   player: {fileID: 3746557956694483059}
   animator: {fileID: 460841826291297441}
+  typeSpeed: 0.015
 --- !u!1 &1608130073
 GameObject:
   m_ObjectHideFlags: 0
